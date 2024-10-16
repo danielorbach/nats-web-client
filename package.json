@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "test": "jest",
     "nats": "go run github.com/nats-io/natscli/nats@latest"
   },
   "dependencies": {
