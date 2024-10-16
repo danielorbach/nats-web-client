@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import natsClient from './natsClient';
 
 describe('NatsClient', () => {
