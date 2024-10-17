@@ -1,5 +1,6 @@
-import { describe, it, expect } from 'vitest';
+import {describe, it, expect} from 'vitest';
 import natsClient from './natsClient';
+import {connect} from "nats.ws";
 
 describe('NatsClient', () => {
     it('should connect to the NATS server', async () => {
@@ -25,3 +26,25 @@ describe('NatsClient', () => {
         expect(receivedMessage).toBe(testMessage);
     });
 });
+
+// see <https://github.com/nats-io/nats.ws> for usage examples.
+describe('DemoServer', async () => {
+    const servers = [
+        // BAD "demo.nats.io",
+        "demo.nats.io:8443",
+        // BAD "ws://demo.nats.io",
+        // BAD "wss://demo.nats.io",
+        // BAD "ws://demo.nats.io:8443",
+        "wss://demo.nats.io:8443",
+        // BAD "demo.nats.io:4222",
+        // BAD "ws://demo.nats.io:4222",
+        // BAD "wss://demo.nats.io:4222",
+        // BAD "nats://demo.nats.io:4222",
+    ];
+    for (const v of servers) {
+        it(`should connect to ${v}`, async () => {
+            const opts = {servers: v}
+            await expect(connect(opts)).resolves.not.toThrow();
+        })
+    }
+})

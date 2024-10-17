@@ -14,7 +14,7 @@ class NatsClient {
         return NatsClient.instance;
     }
 
-    public async connect(servers: string[] = ['ws://demo.nats.io:8080']): Promise<void> {
+    public async connect(servers: string[] = ['wss://demo.nats.io:8443']): Promise<void> {
         if (!this.nc) {
             try {
                 this.nc = await connect({ servers });
